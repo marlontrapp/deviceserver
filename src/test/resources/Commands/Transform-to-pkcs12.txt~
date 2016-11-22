@@ -1,0 +1,5 @@
+# Create PKCS12 keystore from private key and public certificate.
+openssl pkcs12 -export -name myservercert -in selfsigned.crt -inkey server.key -out keystore.p12
+
+# Convert PKCS12 keystore into a JKS keystore
+keytool -importkeystore -destkeystore mykeystore.jks -srckeystore keystore.p12 -srcstoretype pkcs12 -alias myservercert

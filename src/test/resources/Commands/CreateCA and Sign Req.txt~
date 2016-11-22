@@ -1,0 +1,10 @@
+#Create a CA:
+openssl req -config openssl.cnf -extfile extensions.cnf -createserial -new -x509 -keyout private/privkey.pem -out cacert.pem -days 3650
+
+#Create a certificate request:
+openssl req -out DEV.csr -new -newkey rsa:2048 -nodes -keyout DEV.key -config ../CA/root2/openssl.cnf
+#Sign an certificate request:
+openssl ca -config openssl.cnf -out ../../JS/JS.pem -infiles ../../JS/JS.csr
+
+#Generate CRL
+openssl ca -config openssl.cnf -gencrl -out crl.pem
